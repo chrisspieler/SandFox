@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Loader;
+using SandFox;
 
 namespace ManagedPayload;
 
@@ -26,11 +27,8 @@ public static class Program
                     var assemblyLocation = Assembly.GetExecutingAssembly().Location;
                     Log.Info($"Loading assembly from path: {assemblyLocation}");
                     var asm = alc.LoadFromAssemblyPath(assemblyLocation);
-                    Log.Info($"Payload assembly: {asm}");
                     var program = asm.GetType("ManagedPayload.Program");
-                    Log.Info($"Payload program: {program?.Name}");
                     var main = program.GetMethod("PayloadMain");
-                    Log.Info($"Payload main: {main?.Name}");
                     main?.Invoke(null, new object[] { argument });
                 }
                 return 0;
@@ -42,18 +40,8 @@ public static class Program
             return -1;
         }
         Log.Info($"In game assembly load context");
-        SandFox.Init();
+        SandFoxSystem.Init();
         return 0;
-        //var outOfContextScene = typeof(GameManager).GetProperty("ActiveScene").GetValue(null) as Scene;
-        //Log.Info($"Out of context is null: {outOfContextScene is null}");
-        //using (alc.EnterContextualReflection())
-        //{
-        //    alc.LoadFromAssemblyName(Assembly.GetCallingAssembly().GetName());
-        //    var inContextScene = typeof(GameManager).GetProperty("ActiveScene").GetValue(null) as Scene;
-        //    Log.Info($"In context is null: {inContextScene is null}");
-        //    SandFox.Init();
-        //}
-        //return 0;
     }
 
     private static bool IsIsolatedAssemblyContext(AssemblyLoadContext alc)
