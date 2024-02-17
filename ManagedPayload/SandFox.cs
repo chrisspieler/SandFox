@@ -1,6 +1,4 @@
-﻿using Sandbox;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
 namespace SandFox;
 
@@ -12,12 +10,12 @@ public static class SandFoxSystem
         {
             Log.Info($"Adding console commands from {nameof(ManagedPayload)}");
             Commands.ConsoleCommands.AddConsoleCommands(Assembly.GetExecutingAssembly());
+            Log.Info($"Successful {nameof(SandFoxSystem)} init.");
         }
         catch (Exception e)
         {
             Log.Error(e);
             return;
         }
-        Log.Info($"Successful {nameof(SandFoxSystem)} init.");
     }
 }
