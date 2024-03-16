@@ -24,11 +24,11 @@ public static class SceneCommands
             Log.Info($"Unable to find scene: {sceneName}");
             return;
         }
-        if (GameManager.ActiveScene is null)
+        if (Game.ActiveScene is null)
         {
             Log.Info("Active scene is null");
             return;
         }
-        GameManager.ActiveScene.Load(sceneFile);
+        Game.ActiveScene.Load(sceneFile);
     }
 }

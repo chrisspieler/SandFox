@@ -7,9 +7,9 @@ namespace SandFox.Commands
         [ConCmd("player_setpos")]
         public static void SetPlayerPosition(Vector3 position)
         {
-            if (GameManager.ActiveScene is null)
+            if (Game.ActiveScene is null)
                 return;
-            var player = GameManager.ActiveScene
+            var player = Game.ActiveScene
                 .Directory
                 .FindByName("player", false)
                 .FirstOrDefault();

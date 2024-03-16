@@ -8,13 +8,13 @@ public static class GameObjectCommands
     [ConCmd("gameobject_dump")]
     public static void DumpGameObjects()
     {
-        if (GameManager.ActiveScene == null)
+        if (Game.ActiveScene == null)
         {
             Log.Info("Active scene is null");
             return;
         }
-        Log.Info($"Dumping game objects from scene: {GameManager.ActiveScene.Name}");
-        foreach (var go in GameManager.ActiveScene.GetAllObjects(true))
+        Log.Info($"Dumping game objects from scene: {Game.ActiveScene.Name}");
+        foreach (var go in Game.ActiveScene.GetAllObjects(true))
         {
             Log.Info(GameObjectToString(go));
         }
@@ -38,7 +38,7 @@ public static class GameObjectCommands
     [ConCmd("gameobject_setenabled")]
     public static void SetGameObjectEnabled(string gameObject, bool enabled)
     {
-        if (GameManager.ActiveScene == null)
+        if (Game.ActiveScene == null)
         {
             Log.Info("Active scene is null");
             return;
@@ -46,11 +46,11 @@ public static class GameObjectCommands
         Sandbox.GameObject go = null;
         if (Guid.TryParse(gameObject, out var guid))
         {
-            go = GameManager.ActiveScene.Directory.FindByGuid(guid);
+            go = Game.ActiveScene.Directory.FindByGuid(guid);
         }
         else
         {
-            go = GameManager.ActiveScene.Directory.FindByName(gameObject).FirstOrDefault();
+            go = Game.ActiveScene.Directory.FindByName(gameObject).FirstOrDefault();
         }
         // No matching game object found.
         if (go is null)

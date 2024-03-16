@@ -35,7 +35,7 @@ public sealed class FreeCamController : Component
     [ConCmd("freecam_start")]
     public static FreeCamController Begin()
     {
-        var existingController = GameManager.ActiveScene.GetAllComponents<FreeCamController>();
+        var existingController = Game.ActiveScene.GetAllComponents<FreeCamController>();
         if (existingController.Any())
         {
             Log.Info("FreeCam already exists");
@@ -51,7 +51,7 @@ public sealed class FreeCamController : Component
     [ConCmd("freecam_end")]
     public static void EndCurrentFreeCam()
     {
-        var currentFreeCam = GameManager.ActiveScene
+        var currentFreeCam = Game.ActiveScene
             .GetAllComponents<FreeCamController>()
             .FirstOrDefault();
         if ( !currentFreeCam.IsValid() )
@@ -69,7 +69,7 @@ public sealed class FreeCamController : Component
         if ( string.IsNullOrWhiteSpace(tag) )
             return toggled;
 
-        var tagged = GameManager.ActiveScene
+        var tagged = Game.ActiveScene
             .GetAllObjects(false)
             .Where( go => go.Tags.Has(tag) );
         foreach( var go in tagged )
