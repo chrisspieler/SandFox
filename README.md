@@ -21,3 +21,7 @@ Loading .NET DLL plugins is planned to be supported in the future, so you wouldn
 ## Future Plans
 - Allow SandFox to work for multiple different games without needing to restart S&box and reinject the payload each time.
 - Add a plugin system to that allows different DLLs to be loaded depending on game.
+
+## Troubleshooting
+- Issue: Windows Defender thinks that Injector.exe is a virus
+- Resolution: This is a false positive. Injector.exe is just a tool that forces a process to load a DLL. Because Injector.exe is fairly basic, it is probably semantically equivalent to similar tools used for malicious purposes. In the future, I might modify ManagedClient so that it no longer requires Injector.exe to function. 
