@@ -1,0 +1,70 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "ManagedPayload/1.0.0": {
+        "dependencies": {
+          "Lib.Harmony": "2.3.1.1"
+        },
+        "runtime": {
+          "ManagedPayload.dll": {}
+        }
+      },
+      "Lib.Harmony/2.3.1.1": {
+        "dependencies": {
+          "System.Text.Json": "7.0.4"
+        },
+        "runtime": {
+          "lib/net7.0/0Harmony.dll": {
+            "assemblyVersion": "2.3.1.1",
+            "fileVersion": "2.3.1.1"
+          }
+        }
+      },
+      "System.Text.Encodings.Web/7.0.0": {},
+      "System.Text.Json/7.0.4": {
+        "dependencies": {
+          "System.Text.Encodings.Web": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/System.Text.Json.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.1423.51910"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ManagedPayload/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Lib.Harmony/2.3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tydjMTa88RB7MjdP6TzYgclwVRv6KqvvsprinCf0xPuHgemj2k0ZMJnC2b8YwwyGr7+sAG3e4P0ii09uwwRBMA==",
+      "path": "lib.harmony/2.3.1.1",
+      "hashPath": "lib.harmony.2.3.1.1.nupkg.sha512"
+    },
+    "System.Text.Encodings.Web/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OP6umVGxc0Z0MvZQBVigj4/U31Pw72ITihDWP9WiWDm+q5aoe0GaJivsfYGq53o6dxH7DcXWiCTl7+0o2CGdmg==",
+      "path": "system.text.encodings.web/7.0.0",
+      "hashPath": "system.text.encodings.web.7.0.0.nupkg.sha512"
+    },
+    "System.Text.Json/7.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-30Qbrv661XW3zWfSgwgk54KPEBbM9eXYs3fRDjWfAxPp3oogHTUvsVFiUK20lyUDmJskho9SEZvUfsmcU8x16g==",
+      "path": "system.text.json/7.0.4",
+      "hashPath": "system.text.json.7.0.4.nupkg.sha512"
+    }
+  }
+}

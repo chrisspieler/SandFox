@@ -8,14 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Sandbox.Engine">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\sbox\bin\managed\Sandbox.Engine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sandbox.Game">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\sbox\bin\managed\Sandbox.Game.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sandbox.System">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\sbox\bin\managed\Sandbox.System.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 

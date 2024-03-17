@@ -6,7 +6,7 @@ namespace ManagedClient
     {
         public const string INJECTOR_APP_NAME = "Injector.exe";
         public const string NATIVE_PAYLOAD_NAME = "NativePayload.dll";
-        public const string MANAGED_PAYLOAD_NAME = "ManagedPayload.dll";
+        public const string MANAGED_PAYLOAD_FOLDER = "ManagedPayload";
 
         public NativePayloadInjector( string processName )
         {
@@ -23,11 +23,11 @@ namespace ManagedClient
                 return;
             }
 
-            var injectorPath = EnsureFile(INJECTOR_APP_NAME);
-            var nativePayloadPath = EnsureFile(NATIVE_PAYLOAD_NAME);
-            var managedPayloadPath = EnsureFile(MANAGED_PAYLOAD_NAME);
+            var injectorPath = GetLocalPath(INJECTOR_APP_NAME);
+            var nativePayloadPath = GetLocalPath(NATIVE_PAYLOAD_NAME);
+            var managedPayloadFolderPath = GetLocalPath(MANAGED_PAYLOAD_FOLDER);
 
-            EnsureManagedPayloadCopied( managedPayloadPath );
+            EnsureManagedPayloadCopied( managedPayloadFolderPath );
             var processId = GetProcessId(ProcessName);
             var args = new string[] { processId.ToString(), nativePayloadPath };
             ActiveProcess = Process.Start(injectorPath, args );
@@ -40,14 +40,18 @@ namespace ManagedClient
             return process.Id;
         }
 
-        private static string EnsureFile( string fileName)
+        private static string GetLocalPath( string path)
         {
-            var filePath = Path.Combine(Environment.CurrentDirectory, fileName);
-            if (!File.Exists(filePath))
+            var fullPath = Path.Combine(Environment.CurrentDirectory, path);
+            if( Directory.Exists( fullPath ) )
             {
-                throw new FileNotFoundException("Unable to find file.", filePath);
+                return fullPath;
             }
-            return filePath;
+            else if( File.Exists(fullPath) )
+            {
+                return fullPath;
+            }
+            throw new FileNotFoundException("Unable to find directory or file.", fullPath);
         }
 
         private void EnsureManagedPayloadCopied( string sourcePath )
@@ -55,9 +59,15 @@ namespace ManagedClient
             var process = Process.GetProcessesByName(ProcessName).FirstOrDefault() 
                 ?? throw new InvalidOperationException($"Unable to find process: {ProcessName}");
             var processDirectory = Path.GetDirectoryName(process.MainModule.FileName);
-            var destinationPath = Path.Combine(processDirectory, MANAGED_PAYLOAD_NAME);
-            Console.WriteLine($"Copying {MANAGED_PAYLOAD_NAME} to {processDirectory}");
-            File.Copy(sourcePath, destinationPath, true);
+            Console.WriteLine($"Copying dependencies to process directory:");
+            foreach ( var file in Directory.GetFiles( sourcePath ))
+            {
+                var fileName = Path.GetFileName( file );
+                var destinationPath = Path.Combine(processDirectory, fileName);
+                // Overwrite in case there's a newer version of the payload or deps.
+                File.Copy( file, destinationPath, true );
+                Console.WriteLine($"\t{fileName} copied");
+            }
         }
     }
 }
